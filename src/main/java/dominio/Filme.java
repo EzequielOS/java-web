@@ -18,6 +18,14 @@ public class Filme implements Serializable {
 		participacoes = new ArrayList<>();
 	}
 
+	public Filme(Integer codFilme, String titulo, Integer duracao, Integer ano) {
+		this.codFilme = codFilme;
+		this.titulo = titulo;
+		this.duracao = duracao;
+		this.ano = ano;
+		participacoes = new ArrayList<>();
+	}
+
 	public Integer getCodFilme() {
 		return codFilme;
 	}
@@ -56,13 +64,6 @@ public class Filme implements Serializable {
 
 	public void setParticipacoes(List<Participacao> participacoes) {
 		this.participacoes = participacoes;
-	}
-
-	public Filme(Integer codFilme, String titulo, Integer duracao, Integer ano) {
-		this.codFilme = codFilme;
-		this.titulo = titulo;
-		this.duracao = duracao;
-		this.ano = ano;
 	}
 
 	public void addParticipacao(Participacao x) {

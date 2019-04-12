@@ -2,6 +2,7 @@ package dominio;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class Artista implements Serializable {
 	private List<Participacao> participacoes;
 
 	public Artista() {
-
+		participacoes = new ArrayList<>();
 	}
 
 	public Artista(Integer codArtista, String nome, String nacionalidade, BigDecimal cache, Date nascimento) {
@@ -26,6 +27,7 @@ public class Artista implements Serializable {
 		this.nacionalidade = nacionalidade;
 		this.cache = cache;
 		this.nascimento = nascimento;
+		participacoes = new ArrayList<>();
 	}
 
 	public Integer getCodArtista() {
