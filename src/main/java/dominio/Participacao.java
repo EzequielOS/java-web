@@ -3,13 +3,31 @@ package dominio;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="tb_participacao")
 public class Participacao implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer codParticipacao;
 	private String personagem;
 	private BigDecimal desconto;
 
+	@ManyToOne
+	@JoinColumn(name="filme")
 	private Filme filme;
+	
+	@ManyToOne
+	@JoinColumn(name="artista")
 	private Artista artista;
 
 	public Participacao() {

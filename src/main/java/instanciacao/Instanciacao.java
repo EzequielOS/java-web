@@ -1,11 +1,13 @@
 package instanciacao;
 
 import java.io.IOException;
-
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,9 +43,26 @@ public class Instanciacao extends HttpServlet {
 			Participacao p3 = new Participacao(null, "Rose Bukater", new BigDecimal("1000000.00"), f2, a3);
 			Participacao p4 = new Participacao(null, "Katharine Hepburn", new BigDecimal("500000.00"), f1, a2);
 
-			response.getWriter().append("Cache total do filme" + f1 + "\n");
-			response.getWriter().append(f1.cacheTotal() + "\n");
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("meujpa");
+			EntityManager em = emf.createEntityManager();
+			
+			em.getTransaction().begin();
+			
+			em.persist(f1);
+			em.persist(f2);
+			em.persist(a1);
+			em.persist(a2);
+			em.persist(a3);
+			em.persist(p1);
+			em.persist(p2);
+			em.persist(p3);
+			em.persist(p4);
 
+			em.getTransaction().commit();
+			
+			em.close();
+			emf.close();
+			
 			response.getWriter().append("Pronto!");
 
 		} catch (ParseException e) {
