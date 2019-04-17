@@ -4,31 +4,47 @@ import java.util.List;
 
 import dao.ArtistaDao;
 import dao.DaoFactory;
-import dao.Impl.EM;
+import dao.Transaction;
 import dominio.Artista;
 
-public class ArtistaServico {	
+public class ArtistaServico {
 	private ArtistaDao dao;
-	
+
 	public ArtistaServico() {
 		dao = DaoFactory.criarArtistaDao();
 	}
-	
+
 	public void inserirAtualizar(Artista x) {
-		EM.getLocalEm().getTransaction().begin();
-		dao.inserirAtualizar(x);
-		EM.getLocalEm().getTransaction().commit();
+		try {
+			Transaction.begin();
+			dao.inserirAtualizar(x);
+			Transaction.commit();
+		} catch (RuntimeException e) {
+			if (Transaction.isActive()) {
+				Transaction.roolback();
+			}
+		}
+
 	}
+
 	public void excluir(Artista x) {
-		EM.getLocalEm().getTransaction().begin();
-		dao.excluir(x);
-		EM.getLocalEm().getTransaction().commit();
+		try {
+			Transaction.begin();
+			dao.excluir(x);
+			Transaction.commit();
+		} catch (RuntimeException e) {
+			if(Transaction.isActive()) {
+				Transaction.roolback();
+			}
+		}
 	}
-	public Artista buscar(int cod){
+
+	public Artista buscar(int cod) {
 		return dao.buscar(cod);
 	}
-	public List<Artista> buscarTodos(){
+
+	public List<Artista> buscarTodos() {
 		return dao.buscarTodos();
 	}
-	
+
 }
