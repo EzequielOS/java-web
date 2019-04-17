@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import dominio.Artista;
 import dominio.Filme;
 import dominio.Participacao;
+import servico.ArtistaServico;
+import servico.FilmeServico;
+import servico.ParticipacaoServico;
 
 @WebServlet("/Instanciacao")
 public class Instanciacao extends HttpServlet {
@@ -42,27 +45,23 @@ public class Instanciacao extends HttpServlet {
 			Participacao p2 = new Participacao(null, "Howard Hughes", new BigDecimal("1000000.00"), f1, a1);
 			Participacao p3 = new Participacao(null, "Rose Bukater", new BigDecimal("1000000.00"), f2, a3);
 			Participacao p4 = new Participacao(null, "Katharine Hepburn", new BigDecimal("500000.00"), f1, a2);
+			
+			ArtistaServico as = new ArtistaServico();
+			FilmeServico fs = new FilmeServico();
+			ParticipacaoServico ps = new ParticipacaoServico();
+			
+			fs.inserirAtualizar(f1);
+			fs.inserirAtualizar(f2);
+			
+			as.inserirAtualizar(a1);
+			as.inserirAtualizar(a2);
+			as.inserirAtualizar(a3);
+			
+			ps.inserirAtualizar(p1);
+			ps.inserirAtualizar(p2);
+			ps.inserirAtualizar(p3);
+			ps.inserirAtualizar(p4);
 
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory("meujpa");
-			EntityManager em = emf.createEntityManager();
-			
-			em.getTransaction().begin();
-			
-			em.persist(f1);
-			em.persist(f2);
-			em.persist(a1);
-			em.persist(a2);
-			em.persist(a3);
-			em.persist(p1);
-			em.persist(p2);
-			em.persist(p3);
-			em.persist(p4);
-
-			em.getTransaction().commit();
-			
-			em.close();
-			emf.close();
-			
 			response.getWriter().append("Pronto!");
 
 		} catch (ParseException e) {
