@@ -5,9 +5,6 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +17,7 @@ import dominio.Participacao;
 import servico.ArtistaServico;
 import servico.FilmeServico;
 import servico.ParticipacaoServico;
+import servico.ServicoException;
 
 @WebServlet("/Instanciacao")
 public class Instanciacao extends HttpServlet {
@@ -38,7 +36,7 @@ public class Instanciacao extends HttpServlet {
 					sdf.parse("11/11/1974"));
 			Artista a2 = new Artista(null, "Cate Blanchett", "Australia", new BigDecimal("5000000.00"),
 					sdf.parse("14/05/1969"));
-			Artista a3 = new Artista(null, "Leornardo Di Caprio", "EUA", new BigDecimal("8000000.00"),
+			Artista a3 = new Artista(null, "Kate Winslet", "EUA", new BigDecimal("8000000.00"),
 					sdf.parse("05/10/1975"));
 
 			Participacao p1 = new Participacao(null, "Jack Dawson", new BigDecimal("2000000.00"), f2, a1);
@@ -66,6 +64,8 @@ public class Instanciacao extends HttpServlet {
 
 		} catch (ParseException e) {
 			response.getWriter().append("Erro ao Instanciar Data! Instância não criada.");
+		}catch (ServicoException e) {
+			response.getWriter().append("Erro!" + e.getMessage());
 		}
 	}
 
