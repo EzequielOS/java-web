@@ -40,7 +40,7 @@ public class ParticipacaoDaoImpl implements ParticipacaoDao {
 	@Override
 	public List<Participacao> buscarTodos() {
 		String jpql = "SELECT x FROM Participacao x";
-		Query query = em.createNamedQuery(jpql);
+		Query query = em.createQuery(jpql);
 		return query.getResultList();
 	}
 
