@@ -34,7 +34,7 @@ public class Instanciacao extends HttpServlet {
 
 			Artista a1 = new Artista(null, "Leornardo Di Caprio", "EUA", new BigDecimal("10000000.00"),
 					sdf.parse("11/11/1974"));
-			Artista a2 = new Artista(null, "Cate Blanchett", "Australia", new BigDecimal("5000000.00"),
+			Artista a2 = new Artista(null, "Cate Blanchett", "AUS", new BigDecimal("5000000.00"),
 					sdf.parse("14/05/1969"));
 			Artista a3 = new Artista(null, "Kate Winslet", "EUA", new BigDecimal("8000000.00"),
 					sdf.parse("05/10/1975"));
