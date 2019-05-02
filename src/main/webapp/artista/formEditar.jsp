@@ -22,13 +22,13 @@
 	<!-- Begin page content -->
 	<div class="container">
 		<div class="page-header">
-			<h1>Adicionar Artista</h1>
+			<h1>Editar Artista</h1>
 		</div>
 
 		<form method="post" name="myform" class="form-horizontal"
-			action="<%=request.getContextPath()%>/artista/inserir">
-			
-			
+			action="<%=request.getContextPath()%>/artista/atualizar">
+
+
 			<div class="form-group">
 				<div class="col-sm-offset-2 conl-sm-10">
 					<ul>
@@ -36,6 +36,14 @@
 							<li class="erro">${msg}</li>
 						</c:forEach>
 					</ul>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="codArtista">Código:</label>
+				<div class="col-sm-5">
+					<input type="text" name="codArtista" id="codArtista" value="${item.codArtista}"
+						required="required" readonly="readonly" class="form-control" />
 				</div>
 			</div>
 
@@ -73,8 +81,9 @@
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 conl-sm-10">
-					<button type="submit" class="btn btn-primary">Inserir</button>
-					<a href="<%=request.getContextPath()%>/artista/listar" class="btn btn-danger">Voltar</a>
+					<button type="submit" class="btn btn-primary">Atualizar</button>
+					<a href="<%=request.getContextPath()%>/artista/listar"
+						class="btn btn-danger">Voltar</a>
 				</div>
 			</div>
 		</form>
