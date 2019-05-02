@@ -27,6 +27,17 @@
 
 		<form method="post" name="myform" class="form-horizontal"
 			action="<%=request.getContextPath()%>/artista/inserir">
+			
+			
+			<div class="form-group">
+				<div class="col-sm-offset-2 conl-sm-10">
+					<ul>
+						<c:forEach items="${erros}" var="msg">
+							<li>${msg}</li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
 
 			<div class="form-group">
 				<label class="col-sm-2 control-label" for="nome">Nome:</label>

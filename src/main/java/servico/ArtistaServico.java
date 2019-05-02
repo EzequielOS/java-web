@@ -1,5 +1,6 @@
 package servico;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.ArtistaDao;
@@ -13,6 +14,30 @@ public class ArtistaServico {
 	public ArtistaServico() {
 		dao = DaoFactory.criarArtistaDao();
 	}
+
+	public void validar(Artista x) throws ValidacaoException {
+		List<String> erros = new ArrayList<>();
+		
+		if (x.getNome() == null) {
+			erros.add("Favor preencher campo nome!");
+		}
+		
+		if (x.getNacionalidade() == null) {
+			erros.add("Favor preencher campo nacionalidade!");
+		}
+		
+		if (x.getNascimento() == null) {
+			erros.add("Favor preencher campo nascimento com valor valido!");
+		}
+		
+		if (x.getCache() == null) {
+			erros.add("Favor preencher campo cache com valor valido!");
+		}
+		
+		if(!erros.isEmpty()) {
+			throw new ValidacaoException("Erro de validacao!", erros);
+		}
+ 	}
 
 	public void inserir(Artista x) throws ServicoException {
 		try {
@@ -32,7 +57,7 @@ public class ArtistaServico {
 		}
 
 	}
-	
+
 	public void atualizar(Artista x) throws ServicoException {
 		try {
 			Artista aux = dao.buscaNomeExatoDiferente(x.getCodArtista(), x.getNome());
@@ -52,14 +77,14 @@ public class ArtistaServico {
 
 	}
 
-	public void excluir(Artista x) throws ServicoException{
+	public void excluir(Artista x) throws ServicoException {
 		try {
 			x = dao.buscar(x.getCodArtista());
-			if(! x.getParticipacoes().isEmpty()) {
+			if (!x.getParticipacoes().isEmpty()) {
 				throw new ServicoException("Erro ! Nao se pode excluir artistas com participacoes", 2);
-				
+
 			}
-			
+
 			Transaction.begin();
 			dao.excluir(x);
 			Transaction.commit();
@@ -82,7 +107,7 @@ public class ArtistaServico {
 		return dao.buscarTodosOrdenadosPorNome();
 	}
 
-	public List<Artista> buscarPorNome(String trecho){
+	public List<Artista> buscarPorNome(String trecho) {
 		return dao.buscarPorNome(trecho);
 	}
 }
