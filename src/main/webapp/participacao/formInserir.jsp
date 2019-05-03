@@ -22,13 +22,14 @@
 	<!-- Begin page content -->
 	<div class="container">
 		<div class="page-header">
-			<h1>Adicionar Artista</h1>
+			<h1>Inserir nova participacao: ${item.filme.titulo}</h1>
 		</div>
 
 		<form method="post" name="myform" class="form-horizontal"
-			action="<%=request.getContextPath()%>/artista/inserir">
-			
-			
+			action="<%=request.getContextPath()%>/participacao/inserir">
+
+			<input type="hidden" name="codFilme" value="${item.filme.codFilme}" />
+
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<ul>
@@ -40,41 +41,45 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="nome">Nome:</label>
+				<label class="col-sm-2 control-label" for="personagem">Nome
+					da Personagem:</label>
 				<div class="col-sm-5">
-					<input type="text" name="nome" id="nome" value="${item.nome}"
-						required="required" class="form-control" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" for="nacionalidade">Nacionalidade:</label>
-				<div class="col-sm-5">
-					<input type="text" name="nacionalidade" id="nacionalidade"
-						placeholder="Ex.. EUA" value="${item.nacionalidade}"
-						required="required" class="form-control" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" for="cache">Cache:</label>
-				<div class="col-sm-5">
-					<input type="text" name="cache" id="cache" value="${item.cache}"
-						placeholder="Ex.. 2000000" required="required"
+					<input type="text" name="personagem" id="personagem"
+						value="${item.personagem}" required="required"
 						class="form-control" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="nascimento">Nascimento:</label>
+				<label class="col-sm-2 control-label" for="desconto">Desconto
+					no cache:</label>
 				<div class="col-sm-5">
-					<input type="text" name="nascimento" id="nascimento"
-						placeholder="Ex.. 01/01/2000"
-						value="<fmt:formatDate pattern="dd/MM/yyyy" value="${item.nascimento}"/>"
-						required="required" class="form-control" />
+					<input type="text" name="desconto" id="desconto"
+						value="${item.desconto}" required="required" class="form-control" />
 				</div>
 			</div>
+
 			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
+				<label class="col-sm-2 control-label" for="artista">Selecione
+					o Artista:</label>
+				<div class="col-sm-5">
+					<select name="artista" class="form-control">
+						<c:forEach items="${artistas}" var="x">
+							<option value="${x.codArtista}"
+								selected=${x == artistaSelecionado ? 'selected': '' }>
+								${x.nome},
+								<fmt:setLocale value="pt_BR" />
+								<fmt:formatNumber type="currency" value="${x.cache}" />
+						</c:forEach>
+						<option value="" selected=>-- Selecione o Artista --</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 conl-sm-10">
 					<button type="submit" class="btn btn-primary">Inserir</button>
-					<a href="<%=request.getContextPath()%>/artista/listar" class="btn btn-default">Voltar</a>
+					<a href="<%=request.getContextPath()%>/participacao/filmes"
+						class="btn btn-default">Voltar</a>
 				</div>
 			</div>
 		</form>
