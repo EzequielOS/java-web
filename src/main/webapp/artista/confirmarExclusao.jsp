@@ -56,7 +56,7 @@
 				href="<%=request.getContextPath()%>/artista/excluir?cod=${item.codArtista}"
 				class="btn btn-danger">Remover</a> <a
 				href="<%=request.getContextPath()%>/artista/listar"
-				class="btn btn-success">Voltar</a>
+				class="btn btn-default">Voltar</a>
 		</div>
 	</div>
 

@@ -28,7 +28,7 @@
 		<div class="row">
 			<div class="col-sm-2">
 				<form class="navbar-form" action="<%=request.getContextPath()%>/artista/novo">
-					<button type="submit" class="btn btn-primary">Adicionar
+					<button type="submit" class="btn btn-success">Adicionar
 						Elemento</button>
 				</form>
 			</div>
@@ -62,7 +62,7 @@
 						<td>${x.nacionalidade}</td>
 						<td><fmt:setLocale value="pt_BR"/><fmt:formatNumber type="currency" value="${x.cache}"/></td>
 						<td><fmt:formatDate type="date" pattern="dd/MM/yyyy" value="${x.nascimento}"/></td>
-						<td><a href="<%=request.getContextPath()%>/artista/editar?cod=${x.codArtista}" class="btn btn-success btn-xs">Editar</a>
+						<td><a href="<%=request.getContextPath()%>/artista/editar?cod=${x.codArtista}" class="btn btn-primary btn-xs">Editar</a>
 						<a href="<%=request.getContextPath()%>/artista/remover?cod=${x.codArtista}" class="btn btn-danger btn-xs">Deletar</a></td>
 					</tr>
 				</c:forEach>

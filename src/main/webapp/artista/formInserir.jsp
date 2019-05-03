@@ -74,7 +74,7 @@
 			<div class="form-group">
 				<div class="col-sm-offset-2 conl-sm-10">
 					<button type="submit" class="btn btn-primary">Inserir</button>
-					<a href="<%=request.getContextPath()%>/artista/listar" class="btn btn-danger">Voltar</a>
+					<a href="<%=request.getContextPath()%>/artista/listar" class="btn btn-default">Voltar</a>
 				</div>
 			</div>
 		</form>
