@@ -22,12 +22,13 @@
 	<!-- Begin page content -->
 	<div class="container">
 		<div class="page-header">
-			<h1>Inserir nova participacao: ${item.filme.titulo}</h1>
+			<h1>Inserir nova participacao para o filme: ${item.filme.titulo}</h1>
 		</div>
 
 		<form method="post" name="myform" class="form-horizontal"
 			action="<%=request.getContextPath()%>/participacao/inserir">
 
+			<!-- Importante! Nao esqueca de repassar o codigo do filme -->
 			<input type="hidden" name="codFilme" value="${item.filme.codFilme}" />
 
 			<div class="form-group">
@@ -42,11 +43,24 @@
 
 			<div class="form-group">
 				<label class="col-sm-2 control-label" for="personagem">Nome
-					da Personagem:</label>
+					do personagem:</label>
 				<div class="col-sm-5">
 					<input type="text" name="personagem" id="personagem"
-						value="${item.personagem}" required="required"
-						class="form-control" />
+						value="${item.personagem}" class="form-control" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="artista">Selecione
+					o artista:</label>
+				<div class="col-sm-5">
+					<select name="codArtista" class="form-control">
+						<option value="">-- Selecione o artista--</option>
+						<c:forEach items="${artistas}" var="x">
+							<option value="${x.codArtista}" <c:if test="${x == artistaSelecionado}">selected="selected"</c:if>>
+								${x.nome}, <fmt:setLocale value="pt_BR" /><fmt:formatNumber type="currency" value="${x.cache}" />    
+							</option>
+						</c:forEach>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">
@@ -54,36 +68,17 @@
 					no cache:</label>
 				<div class="col-sm-5">
 					<input type="text" name="desconto" id="desconto"
-						value="${item.desconto}" required="required" class="form-control" />
+						value="${item.desconto}" class="form-control" />
 				</div>
 			</div>
-
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="artista">Selecione
-					o Artista:</label>
-				<div class="col-sm-5">
-					<select name="artista" class="form-control">
-						<c:forEach items="${artistas}" var="x">
-							<option value="${x.codArtista}"
-								selected=${x == artistaSelecionado ? 'selected': '' }>
-								${x.nome},
-								<fmt:setLocale value="pt_BR" />
-								<fmt:formatNumber type="currency" value="${x.cache}" />
-						</c:forEach>
-						<option value="" selected=>-- Selecione o Artista --</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="col-sm-offset-2 conl-sm-10">
+				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" class="btn btn-primary">Inserir</button>
 					<a href="<%=request.getContextPath()%>/participacao/filmes"
 						class="btn btn-default">Voltar</a>
 				</div>
 			</div>
 		</form>
-
 	</div>
 
 	<jsp:include page="/resources/templates/rodape.jsp"></jsp:include>
